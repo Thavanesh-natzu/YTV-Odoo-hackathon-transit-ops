@@ -27,7 +27,7 @@
  */
 
 const FuelLog = require("../models/FuelLog");
-const pool = require("../config/database");
+const pool = require("../config/db");
 
 /** Builds the standard success response body (API_SPEC.md). */
 function successResponse(message, data = {}) {
@@ -182,25 +182,25 @@ async function getDashboard(req, res) {
   try {
     const [[vehicleCounts]] = await pool.query(
       `SELECT
-         COUNT(*) AS total_vehicles,
-         SUM(status = 'Available') AS available_vehicles,
-         SUM(status = 'On Trip')   AS on_trip_vehicles,
-         SUM(status = 'In Shop')   AS in_shop_vehicles,
-         SUM(status = 'Retired')   AS retired_vehicles
-       FROM Vehicles`
+          COUNT(*) AS total_vehicles,
+          SUM(status = 'Available') AS available_vehicles,
+          SUM(status = 'On Trip')   AS on_trip_vehicles,
+          SUM(status = 'In Shop')   AS in_shop_vehicles,
+          SUM(status = 'Retired')   AS retired_vehicles
+        FROM Vehicles`
     );
 
     const [[tripCounts]] = await pool.query(
       `SELECT
-         SUM(status = 'Dispatched') AS active_trips,
-         SUM(status = 'Draft')      AS pending_trips
-       FROM Trips`
+          SUM(status = 'Dispatched') AS active_trips,
+          SUM(status = 'Draft')      AS pending_trips
+        FROM Trips`
     );
 
     const [[driverCounts]] = await pool.query(
       `SELECT
-         SUM(status = 'On Trip') AS drivers_on_duty
-       FROM Drivers`
+          SUM(status = 'On Trip') AS drivers_on_duty
+        FROM Drivers`
     );
 
     const totalVehicles = Number(vehicleCounts.total_vehicles) || 0;
