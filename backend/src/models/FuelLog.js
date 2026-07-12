@@ -18,7 +18,7 @@
  * ---------------------------------------------------------------------------
  */
 
-const pool = require("../config/database");
+const pool = require("../config/db");
 
 /**
  * Coerces DECIMAL columns (which mysql2 returns as strings by default) into
