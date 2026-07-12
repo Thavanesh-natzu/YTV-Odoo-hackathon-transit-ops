@@ -181,9 +181,7 @@ function Dashboard() {
             >
               Failed to load fuel logs: {fuelLogsError.message}
             </motion.div>
-          ) : (
-            <FuelCostTrendChart key="fuel-cost-chart" fuelLogs={isFuelLogsLoading ? [] : fuelLogs} />
-          )}
+          ): null}
         </AnimatePresence>
       </motion.section>
     </motion.div>
