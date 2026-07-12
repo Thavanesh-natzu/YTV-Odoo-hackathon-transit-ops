@@ -1,0 +1,145 @@
+/* =========================================================================
+   animations.css
+   Reusable keyframes + the "HUD frame" signature element used across
+   panels, cards and the intro sequence. All animations are transform /
+   opacity based so they stay on the GPU compositor and never touch
+   layout-triggering properties.
+   ========================================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translate3d(0, -10px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translate3d(-18px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale3d(0.94, 0.94, 1); }
+  to   { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+@keyframes scaleOut {
+  from { opacity: 1; transform: scale3d(1, 1, 1); }
+  to   { opacity: 0; transform: scale3d(0.94, 0.94, 1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.55; transform: scale3d(1, 1, 1); }
+  50%      { opacity: 1;    transform: scale3d(1.06, 1.06, 1); }
+}
+
+@keyframes bounceSoft {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -4px, 0); }
+}
+
+@keyframes scanline {
+  0%   { transform: translate3d(0, -100%, 0); }
+  100% { transform: translate3d(0, 100%, 0); }
+}
+
+@keyframes sweep {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- Utility animation classes ---------------------------------------- */
+.anim-fade-in       { animation: fadeIn 0.4s var(--ease-hud) both; }
+.anim-fade-slide-up { animation: fadeSlideUp 0.45s var(--ease-hud) both; }
+.anim-fade-slide-down { animation: fadeSlideDown 0.4s var(--ease-hud) both; }
+.anim-slide-in-left { animation: slideInLeft 0.4s var(--ease-hud) both; }
+.anim-scale-in      { animation: scaleIn 0.3s var(--ease-hud) both; }
+.anim-bounce        { animation: bounceSoft 1.6s ease-in-out infinite; }
+
+/* ---- Signature element: HUD corner-bracket frame ----------------------
+   Applied to panels/cards to read as a targeting-reticle readout.
+   Pure CSS, GPU-friendly (only ::before/::after with gradients + border). */
+.hud-frame {
+  position: relative;
+  background: var(--color-panel-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-panel-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-panel);
+}
+
+.hud-frame::before,
+.hud-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.3s var(--ease-hud);
+}
+
+.hud-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
+  border-top-left-radius: var(--radius-sm);
+}
+
+.hud-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.hud-frame:hover::before,
+.hud-frame:hover::after {
+  opacity: 1;
+}
+
+/* Ambient scanline overlay, used on video backgrounds for the HUD feel */
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 229, 255, 0.06),
+    transparent
+  );
+  animation: scanline 5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanline-overlay::after {
+    animation: none;
+    display: none;
+  }
+}

@@ -1,0 +1,76 @@
+/* =========================================================================
+   dashboard.css
+   Premium dashboard layout: glass cards, gradient headers, responsive grid.
+   ========================================================================= */
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, rgba(0, 229, 255, 0.14), rgba(124, 156, 255, 0.06) 60%, transparent);
+  border: 1px solid var(--color-panel-border);
+}
+
+.dash-header__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+}
+
+.dash-header__title {
+  font-size: var(--fs-2xl);
+  margin: 0;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.dash-card {
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dash-card__label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dash-card__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.dash-section {
+  margin-top: var(--space-6);
+}
+
+.dash-section__title {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .dash-grid {
+    grid-template-columns: 1fr;
+  }
+}

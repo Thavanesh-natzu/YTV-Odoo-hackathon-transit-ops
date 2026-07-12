@@ -1,0 +1,102 @@
+/* =========================================================================
+   map.css
+   Smooth transitions for the FleetMap zoom/pan/canvas layer.
+   ========================================================================= */
+
+.fleet-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, rgba(0, 229, 255, 0.08), transparent 60%), var(--color-panel);
+}
+
+.fleet-map__canvas {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 0.5s var(--ease-hud);
+}
+
+.fleet-map__controls {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 2;
+}
+
+.fleet-map__control-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--color-panel-glass);
+  border: 1px solid var(--color-panel-border);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-hud), background 0.2s var(--ease-hud);
+}
+
+.fleet-map__control-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 229, 255, 0.14);
+}
+
+.fleet-map__legend {
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  z-index: 2;
+}
+
+.fleet-map__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+}
+
+.fleet-map__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.fleet-map__marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition: left 0.6s var(--ease-hud), top 0.6s var(--ease-hud);
+}
+
+.fleet-map__marker-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(0, 229, 255, 0.15);
+}
+
+.fleet-map__route-line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fleet-map__canvas,
+  .fleet-map__marker {
+    transition: none;
+  }
+}
