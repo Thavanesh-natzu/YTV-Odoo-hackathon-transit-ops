@@ -15,7 +15,7 @@
 //   - The catch block logs the real error server-side (for debugging)
 //     while still returning the same generic message to the client.
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -80,10 +80,10 @@ async function login(req, res) {
       return errorResponse(res, 401, 'Invalid email or password');
     }
 
-    const passwordMatches = await bcrypt.compare(password, user.password);
+    //const passwordMatches = await bcrypt.compare(password, user.password);
 
-    if (!passwordMatches) {
-      return errorResponse(res, 401, 'Invalid email or password');
+    if (password !== user.password) {
+    return errorResponse(res, 401, "Invalid email or password");
     }
 
     const token = jwt.sign(

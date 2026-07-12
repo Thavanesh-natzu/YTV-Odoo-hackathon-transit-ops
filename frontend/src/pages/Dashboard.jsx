@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useDashboardMetrics from "../hooks/useDashboardMetrics";
 import KPICards from "../components/KPICards";
-import { FleetUtilizationChart, FuelCostTrendChart } from "../components/Charts";
+//import { FleetUtilizationChart, FuelCostTrendChart } from "../components/Charts";
 import { getFuelLogs } from "../services/fuelService";
 
 const REFRESH_INTERVAL_MS = 30000;
@@ -161,7 +161,7 @@ function Dashboard() {
           gap: "1.25rem",
         }}
       >
-        <FleetUtilizationChart fleetUtilization={metrics?.fleetUtilization} />
+        {/* <FleetUtilizationChart metrics={metrics} isLoading={isLoading} /> */}
 
         <AnimatePresence mode="wait">
           {fuelLogsError ? (

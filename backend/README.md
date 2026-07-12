@@ -9,7 +9,7 @@ Node.js + Express + MySQL backend for TransitOps.
 > documents win - open an issue rather than changing behavior silently.
 Requirements
 Node.js 18+
-MySQL 8+ (database name: `transitops`, per `DATABASE_SCHEMA.md`)
+MySQL 8+ (database name: `sql12832841`, per `DATABASE_SCHEMA.md`)
 Environment variables
 Create a `.env` file in `backend/` with:
 ```

@@ -12,8 +12,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tripService from '../services/tripService';
-import vehicleService from '../services/vehicleService';
-import driverService from '../services/driverService';
+//import vehicleService from '../services/vehicleService';
+//import driverService from '../services/driverService';
 
 const INITIAL_FORM = {
   vehicle_id: '',
@@ -37,8 +37,8 @@ function CreateTrip() {
     (async () => {
       try {
         const [vehicleRes, driverRes] = await Promise.all([
-          vehicleService.getAllVehicles(),
-          driverService.getAllDrivers(),
+          //vehicleService.getAllVehicles(),
+          //driverService.getAllDrivers(),
         ]);
         setVehicles(vehicleRes.data.data);
         setDrivers(driverRes.data.data);

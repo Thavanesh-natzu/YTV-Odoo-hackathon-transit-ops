@@ -11,8 +11,8 @@ import PageTransition from './components/layout/PageTransition';
 // Page components
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Vehicles from './pages/Vehicles';
-import Drivers from './pages/Drivers';
+//import Vehicles from './pages/Vehicles';
+//import Drivers from './pages/Drivers';
 import Trips from './pages/Trips';
 import CreateTrip from './pages/CreateTrip';
 import Maintenance from './pages/Maintenance';
@@ -80,22 +80,7 @@ function AppContent() {
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/vehicles"
-        element={
-          <ProtectedRoute>
-            <Vehicles />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/drivers"
-        element={
-          <ProtectedRoute>
-            <Drivers />
-          </ProtectedRoute>
-        }
-      />
+      
       <Route
         path="/trips"
         element={
